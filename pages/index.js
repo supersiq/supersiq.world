@@ -34,8 +34,8 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/meme.png" />
+        <title>bug</title>
+        <link rel="icon" href="/ray.png" />
       </Head>
 
       <main className={styles.main}>
