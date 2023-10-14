@@ -18,14 +18,14 @@
   font-size: 16px;
   line-height: 24px;
   color: #353740;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-family: "ColfaxAI", 'Gill Sans', sans-serif;
 }
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 0 px;
-  cursor: grabbing;
+  cursor: url(https://cur.cursors-4u.net/user/use-1/use157.cur), auto;
 }
 .main .icon {
   width: 34px;
