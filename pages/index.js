@@ -34,18 +34,18 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>bug</title>
+        <title>inspect me</title>
         <link rel="icon" href="/ray.png" />
       </Head>
 
       <main className={styles.main}>
         <img src="/meme.png"/>
-        <h3>Become a world builder! Enter a keyword to build your own architectural manifesto.</h3>
+        <h3>Enter a keyword to generate your own architectural manifesto.</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
             name="keyword"
-            placeholder="lil keyword pls"
+            placeholder="Keyword"
             value={keywordInput}
             onChange={(e) => setKeywordInput(e.target.value)}
           />

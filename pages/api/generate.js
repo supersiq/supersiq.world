@@ -9,7 +9,7 @@ export default async function (req, res) {
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
-        message: "OpenAI API key not configured, please follow instructions in README.md",
+        message: "OpenAI API key not configured.",
       }
     });
     return;
@@ -19,7 +19,7 @@ export default async function (req, res) {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: generatePrompt(req.body.keyword || ''),
-      max_tokens: 50,
+      max_tokens: 100,
       temperature: 0.6,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
@@ -40,7 +40,6 @@ export default async function (req, res) {
 }
 
 function generatePrompt(keyword) {
-  return `generate an architectural manifesto in 10
-          words based on the keyword: ${keyword}
-`;
+  return `Generate a short, 100 word, architectural manifesto in 
+          words based on the keyword: ${keyword}.`;
 }
