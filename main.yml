@@ -1,0 +1,37 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.email "jonathan.broms@gmail.com"
+          git config --global user.name "supersiq"
+          git checkout --orphan gh-pages
+          git --set-upstream-to=origin/main
+          git pull
+          rm -rf *
+          mv dist/* .
+          git add .
+          git commit -m "GitHub Pages deployment"
+          git push -f origin gh-pages
