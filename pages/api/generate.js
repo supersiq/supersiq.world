@@ -41,5 +41,14 @@ export default async function (req, res) {
 
 function generatePrompt(keyword) {
   return `Generate a short, 100 word, architectural manifesto in 
-          words based on the keyword: ${keyword}.`;
+          words based on the keyword: ${keyword}.
+          Make it snappy and spoken like a classical manifesto with elements such as
+          abandoning all old technology and get on borad with this new ${keyword}.`;
 }
+
+const response = await openai.createImage({
+  prompt: "a white siamese cat",
+  n: 1,
+  size: "512x512",
+});
+image_url = response.data.data[0].url;
