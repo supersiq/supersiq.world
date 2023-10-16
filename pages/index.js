@@ -12,7 +12,7 @@ export default function Home() {
   // A function to handle what happens when the user submits a form
   async function onSubmit(event) {
     event.preventDefault(); // Prevents the webpage from reloading when the form is submitted
-    alert('Hold on - The fiverr employees are typing it up.');
+    alert('The unpaid intern is writing it up.');
     try {
       // Sends a message to the server to create something
       const response = await fetch("/api/generate", {
