@@ -23,16 +23,16 @@ export default async function (req, res) {
       temperature: 0.6,
     });
 
-    // Generate an image based on the keyword
+    // Use the generated text in the prompt for image generation
     const imageResponse = await openai.createImage({
-      prompt: req.body.keyword, // Use the keyword directly to generate an image
+      prompt: `An image inspired by the following text: ${completion.data.choices[0].text}`,
       n: 1,
       size: "1024x1024",
     });
 
     res.status(200).json({
       result: completion.data.choices[0].text,
-      imageUrl: imageResponse.data.data[0].url, // Include the image URL in the response
+      imageUrl: imageResponse.data.data[0].url,
     });
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
