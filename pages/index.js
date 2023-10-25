@@ -40,6 +40,12 @@ export default function Home() {
       console.error(error);
       alert(error.message);
     }
+    const response = await openai.createImage({
+      prompt: "data.result",
+      n: 1,
+      size: "1024x1024",
+    });
+    image_url = response.data.data[0].url;
   }
 
   // The part of the webpage that you can see
@@ -53,7 +59,7 @@ export default function Home() {
 
       {/* The main content of the webpage */}
       <main className={styles.main}>
-        <img src="/meme.png" /> {/* Showing an image on the page */}
+        <img src="image_url" /> {/* Showing an image on the page */}
         <h3>Enter a keyword to generate your own architectural manifesto.</h3>
         
         {/* A form where you can type something and submit it */}
@@ -69,7 +75,6 @@ export default function Home() {
         </form>
         
         {/* A special place to show the result, which may appear after you submit the form */}
-        <div className={styles.result}>{result}</div>
         <div className={styles.result}>{result}</div>
       </main>
     </div>
