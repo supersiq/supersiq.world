@@ -8,6 +8,7 @@ export default function Home() {
   // Setting up two special storage places to keep track of our data
   const [keywordInput, setKeywordInput] = useState(""); // For user input
   const [result, setResult] = useState();               // For the generated result
+  const [imageUrl, setImageUrl] = useState("/meme.png"); // Initialize with the default image URL
 
   // A function to handle what happens when the user submits a form
   async function onSubmit(event) {
@@ -44,7 +45,13 @@ export default function Home() {
       n: 1,
       size: "1024x1024",
     });
-    image_url = response.data.data[0].url;
+    image_url = response.data.data[0].url;    
+    
+    const imageResponse = await fetch(data.imageUrl);
+    const newImageUrl = imageResponse.url;
+
+    // Update the image URL to the new one
+    setImageUrl(newImageUrl); 
   }
 
   // The part of the webpage that you can see
@@ -58,7 +65,9 @@ export default function Home() {
 
       {/* The main content of the webpage */}
       <main className={styles.main}>
-        <img src="/meme.png" /> {/* Showing an image on the page */}
+       {/* <img src="/meme.png" />  Showing an image on the page */}
+        <img src={imageUrl} alt="Generated Image" />
+
         <h3>Enter a keyword to generate your own architectural manifesto.</h3>
         
         {/* A form where you can type something and submit it */}
