@@ -70,6 +70,7 @@ export default function Home() {
         
         {/* A special place to show the result, which may appear after you submit the form */}
         <div className={styles.result}>{result}</div>
+        <div className={styles.result}>{result}</div>
       </main>
     </div>
   );
