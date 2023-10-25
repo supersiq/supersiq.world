@@ -12,7 +12,7 @@ export default function Home() {
   // A function to handle what happens when the user submits a form
   async function onSubmit(event) {
     event.preventDefault(); // Prevents the webpage from reloading when the form is submitted
-    alert('The unpaid intern is writing it up.');
+    alert('input was:', value);
     try {
       // Sends a message to the server to create something
       const response = await fetch("/api/generate", {
@@ -41,7 +41,7 @@ export default function Home() {
       alert(error.message);
     }
     const response = await openai.createImage({
-      prompt: "data.result",
+      prompt: "a white siamese cat",
       n: 1,
       size: "1024x1024",
     });
@@ -59,7 +59,7 @@ export default function Home() {
 
       {/* The main content of the webpage */}
       <main className={styles.main}>
-        <img src="image_url" /> {/* Showing an image on the page */}
+        <img src="/meme.png" /> {/* Showing an image on the page */}
         <h3>Enter a keyword to generate your own architectural manifesto.</h3>
         
         {/* A form where you can type something and submit it */}
