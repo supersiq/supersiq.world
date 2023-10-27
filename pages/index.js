@@ -8,41 +8,39 @@ export default function Home() {
   // Setting up two special storage places to keep track of our data
   const [keywordInput, setKeywordInput] = useState(""); // For user input
   const [result, setResult] = useState();               // For the generated result
-  const [imageUrl, setImageUrl] = useState("/meme.png"); // Initialize with the default image URL
 
-// A function to handle what happens when the user submits a form
-async function onSubmit(event) {
-  event.preventDefault();
-  try {
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ keyword: keywordInput }),
-    });
+  // A function to handle what happens when the user submits a form
+  async function onSubmit(event) {
+    event.preventDefault(); // Prevents the webpage from reloading when the form is submitted
+    alert('The unpaid intern is writing it up.');
+    try {
+      // Sends a message to the server to create something
+      const response = await fetch("/api/generate", {
+        method: "POST", // We're telling the server that we want to create something new
+        headers: {
+          "Content-Type": "application/json", // We're sending data in a specific way
+        },
+        body: JSON.stringify({ keyword: keywordInput }), // We're sending the user's input
+      });
 
-    const data = await response.json();
+      // Reads the response from the server
+      const data = await response.json();
 
-    if (response.status !== 200) {
-      throw data.error || new Error(`Request failed with status ${response.status}`);
+      // Checks if there's a problem with the request
+      if (response.status !== 200) {
+        // If there's a problem, we show an error message
+        throw data.error || new Error(`Request failed with status ${response.status}`);
+      }
+
+      // If everything goes well, we show the result and clear the input
+      setResult(data.result);
+      setKeywordInput("");
+    } catch (error) {
+      // If something goes wrong, we show an error message on the webpage
+      console.error(error);
+      alert(error.message);
     }
-
-    // If everything goes well, we show the result and clear the input
-    setResult(data.result);
-    setKeywordInput("");
-    
-    // The image URL is already provided by the server, no need to make an additional API call
-    const newImageUrl = data.imageUrl;
-
-    // Update the image URL to the new one
-    setImageUrl(newImageUrl);
-  } catch (error) {
-    // If something goes wrong, we show an error message on the webpage
-    console.error(error);
-    alert(error.message);
   }
-}
 
   // The part of the webpage that you can see
   return (
@@ -55,9 +53,7 @@ async function onSubmit(event) {
 
       {/* The main content of the webpage */}
       <main className={styles.main}>
-       {/* <img src="/meme.png" />  Showing an image on the page */}
-        <img src={imageUrl} alt="Generated Image" />
-
+        <img src="/meme.png" /> {/* Showing an image on the page */}
         <h3>Enter a keyword to generate your own architectural manifesto.</h3>
         
         {/* A form where you can type something and submit it */}
